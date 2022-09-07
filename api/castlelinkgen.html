@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>Castle Link</title>
+        <script>
+            // Header Script
+        </script>
+    </head>​
+
+    <body>
+        <input type="text" id="name" placeholder="Name"><br>
+        <input type="text" id="tutor" placeholder="Tutor"><br>
+        <div>
+            <input type="radio" name="action" value="in" id="in">
+            <label for="in">IN</label>
+        </div>
+        <div>
+            <input type="radio" name="action" value="out" id="out">
+            <label for="out">OUT</label>
+        </div>
+        <button onclick="LinkGen()">Generate Link</button>
+        <p id="linkText">Link Will Appear Here</p>
+        <button onclick="copyToClipboard(link)">Copy Link</button>
+
+
+        <script>
+        var link = "";
+        function encodeQueryData(data) {
+            const ret = [];
+            for (let d in data)
+                ret.push(encodeURIComponent(d) + '=' + encodeURIComponent(data[d]));
+            return ret.join('&');
+        }
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text);
+        }
+        function LinkGen() {
+            var name = document.getElementById("name").value;
+            var tutor = document.getElementById("tutor").value;
+            var action = document.querySelector('input[name="action"]:checked').value;
+            var q = {
+                "name": name,
+                "tutor": tutor,
+                "action": action
+            }
+            link = "https://theamazingjeh.github.io/api/castlelink.html?"+ encodeQueryData(q);
+            document.getElementById("linkText").textContent=link;
+        }
+        document.write(document.getElementById("name").value);
+        document.write(document.getElementById("tutor").value);
+
+        </script>
+    </body>
+</html>

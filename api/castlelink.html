@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>Castle Link</title>
+        <script>   
+        /*
+        https://docs.google.com/forms/d/e/
+        Form Identifier
+        /viewform?usp=pp_url
+        &entry.1670212335=Name
+        &entry.1436243285=Tutor
+        &entry.1777069025_hour=Hour
+        &entry.1777069025_minute=Minute
+        &entry.1101813757=ACTION
+
+        */
+        function GetURLParameter(sParam)
+        {
+            var sPageURL = window.location.search.substring(1);
+            var sURLVariables = sPageURL.split('&');
+            for (var i = 0; i < sURLVariables.length; i++) 
+            {
+                var sParameterName = sURLVariables[i].split('=');
+                if (sParameterName[0] == sParam) 
+                {
+                    return sParameterName[1];
+                }
+            }
+        }
+        const FormIdentifier = "1FAIpQLScc2X39dP-PRRM_uqBd-14lTWYb6OS1OlKLk7VQvgh2GuPJkg"
+        const d = new Date();
+        const h = d.getHours();
+        const m = d.getMinutes();
+
+        var url = "https://docs.google.com/forms/d/e/" 
+            + FormIdentifier 
+            + "/viewform?usp=pp_url&entry.1670212335=" + GetURLParameter("name") 
+            + "&entry.1436243285=" + GetURLParameter("tutor") 
+            + "&entry.1777069025_hour=" + h 
+            + "&entry.1777069025_minute=" + m 
+            + "&entry.1101813757="
+        if (GetURLParameter("action") == "in") {
+            url = url + encodeURIComponent("Signing IN (arriving back ON site)")
+        } else if (GetURLParameter("action") == "out") {
+            url = url + encodeURIComponent("Signing OUT (I am leaving now or have already left)")
+        }
+        window.location.replace(url)
+        </script>
+    </head>​
+
+    
